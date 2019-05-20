@@ -4,6 +4,9 @@ plugins {
     id 'com.gradle.plugin-publish' version '0.10.0'
 }
 
+group 'com.github.dant3'
+version '0.2.0'
+
 pluginBundle {
     website = 'https://github.com/dant3/git-repo-plugin'
     vcsUrl = 'https://github.com/dant3/git-repo-plugin'
@@ -30,10 +33,6 @@ sourceSets {
     }
 }
 
-
-
-group 'com.github.dant3'
-version '0.1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
