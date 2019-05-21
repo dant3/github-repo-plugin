@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.github.dant3'
-version '0.2.0'
+version '0.2.1'
 
 pluginBundle {
     website = 'https://github.com/dant3/git-repo-plugin'
@@ -28,7 +28,7 @@ gradlePlugin {
 sourceSets {
     main {
         groovy {
-            srcDirs = ['src']
+            srcDirs += ['src/main/java']
         }
     }
 }
