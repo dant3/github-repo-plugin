@@ -2,17 +2,26 @@ package com.github.dant3
 
 import org.ajoberstar.grgit.Commit
 import org.ajoberstar.grgit.Grgit
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.internal.AbstractTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
 public class GitHubPublishTask extends AbstractTask {
-    @Input File gitDir;
+    @Input DirectoryProperty gitDir = project.getObjects().directoryProperty();
     @Input String branch;
+
+    def gitDir(File file) {
+        return gitDir.set(file);
+    }
+
+    def branch(String branch) {
+        this.branch = branch
+    }
 
     @TaskAction
     def publish() {
-        def gitRepo = Grgit.open(dir: gitDir)
+        def gitRepo = Grgit.open(dir: gitDir.asFile.get())
 
         def head = getHead(gitRepo)
         gitRepo.add(patterns: ['.'])

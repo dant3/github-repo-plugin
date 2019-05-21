@@ -26,7 +26,7 @@ class GitHubRepo {
 
     File directory(Project project) {
         def gitRoot = Paths.get(project.rootDir.absolutePath, ".gitRepos")
-        return gitRoot.resolve(owner).resolve(repository).resolve(branchName).toFile()
+        return project.file(gitRoot.resolve(owner).resolve(repository).resolve(branchName))
     }
 
     def setupOn(Project project) {
@@ -76,8 +76,8 @@ class GitHubRepo {
 
     private def setupPublishing(Project project) {
         Task commitAndPush = project.tasks.create("pushArtifactsToGithub", GitHubPublishTask.class) {
-            gitDir = directory(project)
-            branch = branchName
+            gitDir directory(project)
+            branch branchName
         }
         def hasPublications = project.getPluginManager().hasPlugin("maven-publish")
         if (hasPublications) {
